@@ -1,99 +1,93 @@
-# JSON Server 🚀
+JSON Server – What I Learned 🧠🚀
+🎯 Goal
 
-## Step 1: Running Scripts ⚙️
+I learned how to use JSON Server to simulate a fake backend and test real-world API scenarios while developing frontend and Redux logic.
 
-We added key commands to the scripts section in package.json. We can run commands using these keys.
+⚙️ Running Scripts
 
-Example: Use npm run serve-json to start the JSON Server using the serve-json key.
+I added custom commands to the scripts section in package.json so I can easily start the JSON Server using npm commands.
 
-**Routes Configuration:**
-The routes.json file is used for URL rewriting. It adds /api/v1 prefix to all endpoints.
+Example usage:
+👉 npm run serve-json
 
-**How it works:**
-- /api/v1* pattern matches any URL starting with /api/v1
-- $1 replaces the matched part with everything after /api/v1
-- Example: /api/v1/products → /products
+🔀 Routes Configuration
 
-**Result:**
-- Old endpoint: localhost:3000/products (still works)
-- New endpoint: localhost:3000/api/v1/products (redirects to /products)
+I used a routes.json file to rewrite URLs and add an /api/v1 prefix to all endpoints.
 
-## Step 2: Filtering 🔍
+This allows me to use both:
 
-**by ID:**
-Example: localhost:3000/products/1
+localhost:3000/products
 
-**by specific parameter:**
-Example: localhost:3000/products?category=electronics
+localhost:3000/api/v1/products
 
-Example: localhost:3000/products?price=4000
+This helps simulate real REST API versioning.
 
-**Multiple Parameter:**
-Example: localhost:3000/reviews?rating=4&productId=1
+🔍 Filtering
 
-**Nested Parameter:**
-Example: localhost:3000/newdetails?specifications.processor=Intel i5
+I learned how to filter data:
 
-## Step 3: Sorting 📊
+By ID → /products/1
 
-To sort data, use _sort and _order parameters:
+By specific field → /products?category=electronics
 
-Example: localhost:3000/products?_sort=price&_order=asc (single field sorting)
+By multiple parameters → /reviews?rating=4&productId=1
 
-Example: localhost:3000/products?_sort=price&_order=desc (single field sorting)
+By nested fields → /newdetails?specifications.processor=Intel i5
 
-Example: localhost:3000/reviews?_sort=rating,productId&_order=desc,asc (multiple field sorting)
+📊 Sorting
 
-## Step 4: Pagination 📄
+I learned how to sort results using _sort and _order.
 
-To limit the number of results, use _limit parameter:
+Single field sorting
 
-Example: localhost:3000/products?_limit=2
+Multiple field sorting
 
-To get a specific page, use _page parameter:
+This helps simulate real API sorting behavior.
 
-Example: localhost:3000/products?_limit=2&_page=4
+📄 Pagination
 
-Note: Without _sort, results are returned in default order (usually by ID ascending). To control order, combine with _sort:
+I learned how to limit results and paginate data using:
 
-Example: localhost:3000/products?_limit=2&_sort=price&_order=asc
+_limit
 
-## Step 5: Operators 🔢
+_page
 
-To use comparison operators, add operator suffix to field name:
+This is useful for testing infinite scroll, lazy loading, and paginated lists.
 
-Example: localhost:3000/products?price_gte=4000 (greater than or equal - returns products with price >= 4000)
+🔢 Operators
 
-Example: localhost:3000/products?price_gt=4000 (greater than - returns products with price > 4000)
+I learned how to use comparison operators for filtering numeric values:
 
-Example: localhost:3000/products?price_lte=5000 (less than or equal - returns products with price <= 5000)
+greater than
 
-Example: localhost:3000/products?price_lt=5000 (less than - returns products with price < 5000)
+less than
 
-Example: localhost:3000/products?price=4000 (equal - returns products with price = 4000)
+equal
 
-Example: localhost:3000/products?price_ne=4000 (not equal - returns products with price != 4000)
+not equal
 
-## Step 6: String Search 🔎
+This allows me to simulate advanced filtering logic.
 
-To search across all fields, use q parameter:
+🔎 String Search
 
-Example: localhost:3000/products?q=electronics (simple search - searches in all fields)
+I learned how to search:
 
-To search in a specific field, use _like operator:
+Across all fields using q
 
-Example: localhost:3000/products?title_like=Product (searches in title field)
+Inside a specific field using _like
 
-Note: q parameter will give all results that match in any field
+This is useful for search bar functionality.
 
-## Step 7: Relationship 🔗
+🔗 Relationships
 
-To get associated details, use _embed parameter:
+I learned how to work with related data using:
 
-Example: localhost:3000/products/1?_embed=reviews (get product with its reviews)
+_embed → fetch child resources together
 
-Example: localhost:3000/products/1?_embed=newdetails (get product with its details)
+_expand → fetch parent object with related info
 
-To expand related data, use _expand parameter:
+This helps simulate relational API responses.
 
-Example: localhost:3000/reviews/1?_expand=productId (get review with product information)
+📝 My Notes
+
+JSON Server is a powerful tool for frontend developers to simulate real backend behavior, test Redux async logic, and build production-like API flows without writing an actual backend.
